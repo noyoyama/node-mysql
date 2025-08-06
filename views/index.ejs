@@ -1,43 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= title %></title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <body>
 <%- include('./header'); %>
 <%- include('./error_messages'); %>
 <% if(isAuth) { %>
 <div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <form action="/" method="post">
-        <label>タスクの追加</label>
-        <input required type="text" name="add" placeholder="何をする?"/>
-        <input type="submit" value="追加"/>
-      </form>
-    </div>
-    <div class="col-md-6">
-      <ul>
-        <% for(let todo of todos){ %>
-          <li><span><%= todo.content %></span></li>
-        <% } %>
-      </ul>
-    </div>
-  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <form action="/" method="post">
+        <label>タスクの追加</label>
+        <input required type="text" name="add" placeholder="何をする?"/>
+        <label for="deadline">締め切り日時:</label>
+        <input type="datetime-local" id="deadline" name="deadline">
+        <label for="color">色でグループ分け:</label>
+        <select id="color" name="color">
+          <option value="unassigned" selected>未設定</option>
+          <option value="red">赤</option>
+          <option value="blue">青</option>
+          <option value="green">緑</option>
+          <option value="yellow">黄</option>
+          <option value="purple">紫</option>
+          <option value="orange">オレンジ</option>
+        </select>
+        <input type="submit" value="追加"/>
+      </form>
+    </div>
+    <div class="col-md-6">
+            <form action="/" method="get">
+        <label for="filterColor">色で絞り込む:</label>
+        <select id="filterColor" name="color">
+          <option value="all">すべて</option>
+          <option value="red">赤</option>
+          <option value="blue">青</option>
+          <option value="green">緑</option>
+          <option value="yellow">黄</option>
+          <option value="purple">紫</option>
+          <option value="orange">オレンジ</option>
+        </select>
+        <button type="submit" class="btn btn-secondary">絞り込む</button>
+      </form>
+      <ul>
+        <% for(let todo of todos){ %>
+                    <li style="border-left: 5px solid <%= todo.color !== 'unassigned' ? todo.color : 'transparent' %>;">
+            <span><%= todo.content %></span>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
 </div>
 <% } else { %>
-  <h1>Welcome to the TodoApp</h1>
-  <a class="btn btn-primary" href="/signup" role="button">Sign up now!</a>
+  <h1>Welcome to the TodoApp</h1>
+  <a class="btn btn-primary" href="/signup" role="button">Sign up now!</a>
 <% } %>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
 </body>
 </html>
