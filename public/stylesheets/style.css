@@ -1,8 +1,62 @@
+/* デフォルトのスタイル */
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 a {
-  color: #00B7FF;
+    color: #00B7FF;
+}
+
+.color-dot {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%; /* 丸の形にする */
+    margin-right: 5px; /* タスク名との間にスペースを空ける */
+}
+
+/* グループ分けの丸アイコン */
+.color-dot {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+/* タスクリストのスタイル */
+ul {
+    list-style: none; /* デフォルトのリストマーカーを非表示にする */
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #f8f9fa; /* 背景色を少し灰色にする */
+    border-radius: 5px;
+    border-left: 5px solid transparent; /* 色付けのベース */
+}
+
+/* タスクに色が付いている場合のスタイル */
+li.red {
+    border-color: red;
+}
+li.blue {
+    border-color: blue;
+}
+li.green {
+    border-color: green;
+}
+li.yellow {
+    border-color: yellow;
+}
+li.purple {
+    border-color: purple;
+}
+li.orange {
+    border-color: orange;
 }
