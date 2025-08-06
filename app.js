@@ -3,6 +3,9 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const cookieSession = require('cookie-session');
+const flash = require('connect-flash');
+const secret = 'secretCuisine123';
 
 const app = express();
 
@@ -15,6 +18,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// セッションとフラッシュメッセージのミドルウェアを追加
+app.use(cookieSession({
+  name: "session",
+  keys: [secret],
+  maxAge: 24 * 60 * 60 * 1000
+}));
+app.use(flash());
 
 // authorization
 require("./config/passport")(app);
